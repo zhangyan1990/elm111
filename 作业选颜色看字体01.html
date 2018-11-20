@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8" />
+		<title></title>
+		<style type="text/css">
+			#p1 {
+				font-size: 80px;
+				border: 1px solid black;
+				width: 300px;
+				height: 400px;
+				text-align: center;
+				line-height: 300px;
+				margin-left: 50px;
+			}
+			
+			ul {
+				list-style: none;
+				overflow: hidden;
+				float: left;
+				
+				
+				
+			}
+			
+			ul li {
+				float: left;
+				margin-right: 20px;
+				width: 50px;
+				height: 40px;
+				border: 1px solid black;
+				text-align: center;
+				font-size: 30px;
+			}
+			
+			#one{
+				width: 300px;
+				height: 30px;
+				position: absolute;
+				left: 58px;
+				top: 100px;
+				
+				
+			}
+			#resTime{
+				float: left;
+				margin-left: 10px;
+			}
+			#rightCount{
+				float: right;
+				margin-right: 10px;
+			}
+			
+			
+		</style>
+	</head>
+
+	<body>
+		<p id="p1">
+		
+		</p>
+		<ul id="ul1">
+			<li id="li1"></li>
+			<li id="li2"></li>
+			<li id="li3"></li>
+			<li id="li4"></li>
+			<li id="li5"></li>
+		</ul>
+		<div id="one">
+			<span id="resTime"></span>
+			<span id="rightCount"></span>
+			
+			
+		</div>
+	</body>
+	<script type="text/javascript">
+	
+	
+	
+		//获取对象
+		var p1 = document.getElementById("p1");
+		var li1 = document.getElementById("li1");
+		var li2 = document.getElementById("li2");
+		var li3 = document.getElementById("li3");
+		var li4 = document.getElementById("li4");
+		var li5 = document.getElementById("li5");
+		//定义颜色数组
+		var arrColor = ["red", "blue", "yellow", "green", "purple"];
+		//定义文字数组
+		var arrFont = ['红', '蓝', '黄', '绿', '紫'];
+		//定义两个变量
+		var i, j;
+		//定义一个数组接收每次随机出来的数 共5个
+		var arrNum = [];
+		//定义定时器的原始时间
+		var timeStart = 30;
+		var liContent = [li1,li2,li3,li4,li5];
+		//获取ul
+		var ul1 = document.getElementById("ul1");
+		//获取ul下的li--数组
+		var lis = ul1.getElementsByTagName("li");
+		//获取左边计时器
+		var resTime = document.getElementById("resTime");
+		//获取右边正确的次数
+		var rightCount = document.getElementById("rightCount");
+		//页面开始的时候 默认的状态
+		p1.innerHTML = arrFont[Math.floor(Math.random() * 5)];
+		p1.style.color = arrColor[Math.floor(Math.random() * 5)];
+		for (i = 0; i < 5; i++) {
+				arrNum[i] = Math.floor(Math.random() * 5);
+				for (j = 0; j < i; j++) {
+					if (arrNum[i] == arrNum[j]) {
+						i--;
+					}
+				}
+			}
+		for(i=0;i<5;i++){
+				liContent[i].style.color=arrColor[Math.floor(Math.random() * 5)];
+				liContent[i].innerHTML=arrFont[Math.floor(Math.random() * 5)];
+			}
+		//p1的点击事件
+		p1.onclick = function() {
+			p1.innerHTML = arrFont[Math.floor(Math.random() * 5)];
+			p1.style.color = arrColor[Math.floor(Math.random() * 5)];
+			//得到一个数组 里面是0-5之间的整数,且不相同
+			
+			
+			
+			for (i = 0; i < 5; i++) {
+				arrNum[i] = Math.floor(Math.random() * 5);
+				for (j = 0; j < i; j++) {
+					if (arrNum[i] == arrNum[j]) {
+						i--;
+					}
+				}
+			}
+			//定义一个数组 存放li1-li5中的内容
+			for(i=0;i<5;i++){
+				
+				liContent[i].innerHTML=arrFont[arrNum[i]];
+			}
+			//得到一个数组 里面是0-5之间的整数,且不相同
+			for (i = 0; i < 5; i++) {
+				arrNum[i] = Math.floor(Math.random() * 5);
+				for (j = 0; j < i; j++) {
+					if (arrNum[i] == arrNum[j]) {
+						i--;
+					}
+				}
+			}
+			for(i=0;i<5;i++){
+				
+				liContent[i].style.color=arrColor[arrNum[i]];
+			}
+			var timeStart;
+			var timer = function(){
+				timeStart = 30;
+				timeStart--;
+				
+				if (timeStart<0) {
+					alert("时间到");
+				}
+				return timeStart;
+			}		
+			var a = timer();			
+			resTime.innerHTML = "剩余时间:"+ setInterval(a,500);
+			
+			
+			
+		}
+		
+		
+		
+	</script>
+
+</html>
